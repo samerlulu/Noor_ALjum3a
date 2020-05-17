@@ -1,0 +1,374 @@
+/*
+
+Noor Aljum3a App: Alkahf Sora Reading _ تطبيق نور الجمعة: لتلاوة سورة الكهف
+Idea, Design and Devlopment are made by Samer F. Lulu - 2020 Ramadan 1441
+his App is OPEN SOURCE and free to copy, modify and reuse but NOT TO BE USED IN ANY COMMERCIAL MEANS
+for suggestions and commments please email at: s@SamerLulu.com  / Samer.Lulu@gmail.com
+
+*/
+
+body {
+    direction: rtl;
+    background: rgb(243, 237, 209);
+    /* Normal Mode */
+    background: linear-gradient(90deg, rgba(243, 237, 209, 1) 0%, rgba(248, 244, 217, 1) 50%, rgba(241, 236, 213, 1) 100%);
+    /* background: rgb(18,42,59);
+    background: radial-gradient(circle, rgba(18,42,59,1) 0%, rgba(45,94,129,1) 50%, rgba(18,42,59,1) 100%); */
+    user-select: none;
+}
+
+.ayaText {
+    text-decoration: none;
+    font-family: UthmanicHafs1;
+    color: #f0f028;
+}
+
+.ayaNumber {
+    font-family: AyatNumbers;
+}
+
+.ayaText, .ayaNumber, #Header {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+#divSora {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: none;
+}
+
+#Header {
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: UthmanicHafs1;
+}
+
+.ayaNumber, #Header {
+    color: #a12d2d;
+    /* color:#379b25;  */
+}
+
+#Ayat {
+    text-align: justify;
+}
+
+#Settings {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: fixed;
+    /* background-color: rgba(18, 42, 59,1); */
+    font-size: medium;
+    /* background: rgb(18,42,59);  */
+    /* background: linear-gradient(90deg, rgba(18,42,59,0) 0%, rgba(18,42,59,0.9) 5%, rgba(18,42,59,0.9) 50%, rgba(18,42,59,0.9) 95%, rgba(18,42,59,0) 100%);
+    /* filter: blur(5px);
+    -webkit-filter: blur(5px); */
+    -webkit-backdrop-filter: blur(10px) drop-shadow(0px 0px 20px #fff) brightness(40%);
+    backdrop-filter: blur(10px) drop-shadow(0px 0px 20px #fff) brightness(40%);
+    color: white;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    display: none;
+    text-align: center;
+    /* visibility: hidden; */
+    /* padding: 10% 0; */
+    /* vertical-align: middle; */
+
+}
+
+#divSettingsOuter{
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    
+}
+
+#divSettingsInner{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#divSettingsControls {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+#divDemo{
+    width: 100%;
+    height: 100%;
+    z-index: 25;
+    position: fixed;
+    background: black;
+    top:0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    visibility:visible; 
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+#demoImg{
+    max-width: 90%;
+    /* max-height: 100%; */
+}
+
+#divBtnCloseDemo{
+    position: fixed;
+    bottom: 15px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* background-color: rgba(0, 0, 0, 0.8); */
+}
+
+#btnCloseDemo{
+    text-shadow: 0 0 5px black;
+}
+
+#divDemoAskShowAgian{
+    top: 40%;
+    height: fit-content;
+    padding: 10px 0;
+    display: none;
+}
+
+#divDemoAskShowAgian .controls{
+    display: inline;
+}
+
+#divDemoAskShowAgian p{
+    color: whitesmoke;
+}
+
+.controls {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    /* width: 100%; */
+}
+
+.buttons {
+    width: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 5vh;
+    z-index: 15;
+    font-size: large;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.imgTick {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 25px;
+    height: 25px;
+    filter: brightness(10%);
+}
+
+.divScreenMode {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+#ScreenModes {
+    /* list-style: none; */
+    padding: 0;
+}
+
+#divScreenModesSettingsView {
+    display: none;
+}
+
+#divScrollingSpeedSettingsView {
+    display: none;
+}
+
+#divAyaFontSizeSettingsView{
+    display: none;
+}
+
+
+#divAboutApp{
+    display: none;
+}
+
+#imgLogoAbout{
+    width: 25vw;
+    height: auto;
+    margin-top: 15px;
+}
+
+#titleAboutApp{
+    margin: 5px auto;
+}
+
+#divContactUs{
+    display: none;
+}
+
+#textAboutApp{
+    text-align: justify;
+    font-size: large;
+    padding: 0 20px;
+    overflow: scroll;
+    height: 80vh;
+    margin-top: 1vh;
+}
+/* #ScreenModes li {
+    /* padding:5px 0; 
+    margin-bottom: 10px;
+} */
+
+#imgLogo{
+    width: 34vw;
+}
+
+#textContactUs{
+    font-size: large;
+}
+
+#rangeScrollingSpeed {
+    width: 100%;
+    height: 40px;
+    color: aqua;
+    background-color: aquamarine;
+}
+
+.controlCounter{
+    border: 2px solid whitesmoke;
+    border-radius: 25%;
+    padding:5px 15px;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+.controlImage{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    text-shadow: whitesmoke;
+    margin: 0 5px;
+    filter: invert();
+}
+
+.controlText{
+    font-size: 20px;
+}
+
+.mainControls{
+    width: 100%;
+    /* position: relative; */
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);    
+}
+
+.inlineLink{
+    text-decoration: none;
+    color: lightblue;
+    font-weight: bold;
+}
+
+.textSample{
+    margin: 20px 20px;
+    font-size: 24px;
+    height: 50vh;
+    /* position: relative; */
+    /* display: inline; */
+    
+    text-align: justify;
+    overflow: scroll;
+    font-family: UthmanicHafs1;
+}
+
+.ScreenModesHeader {
+    /* display:inline; */
+    text-align: right;
+    margin: 0 10px 0 0;
+    width: 100%;
+}
+
+.ScreenModesText {
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+
+#ScreenModeNormal {
+    background: linear-gradient(90deg, rgba(243, 237, 209, 1) 0%, rgba(248, 244, 217, 1) 50%, rgba(241, 236, 213, 1) 100%);
+    color: #111;
+    font-size: 24px;
+    font-family: UthmanicHafs1;
+}
+
+#ScreenModeDark {
+    background: linear-gradient(90deg, rgba(18, 42, 59, 1) 0%, rgba(45, 94, 129, 1) 50%, rgba(18, 42, 59, 1) 100%);
+    color: #f0f028;
+    font-size: 24px;
+    font-family: UthmanicHafs1;
+}
+
+#ScreenModeLight {
+    background: linear-gradient(90deg, rgba(242, 242, 242, 1) 0%, rgba(247, 247, 247, 1) 25%, rgba(254, 254, 254, 1) 50%, rgba(247, 247, 247, 1) 75%, rgba(242, 242, 242, 1) 100%);
+    color: #111;
+    font-size: 24px;
+    font-family: UthmanicHafs1;
+}
+
+.divDoneButton {
+    width: 100%;
+    position: fixed;
+    bottom: 10px;
+}
+
+.SettingBox {
+    text-align: center;
+    color: whitesmoke;
+    width: 90%;
+    height: auto;
+    z-index: 20;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    left: 5%;
+    bottom: 5%;
+    visibility: visible;
+    border: 2px outset white;
+    box-shadow: whitesmoke;
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(10px) drop-shadow(0px 0px 20px #fff) brightness(40%);
+    backdrop-filter: blur(10px) drop-shadow(0px 0px 20px #fff) brightness(40%);
+}
+
+.HideME {
+    visibility: hidden;
+}
+
+@font-face {
+    font-family: UthmanicHafs1;
+    src: url(UthmanicHafs1_Ver13.otf);
+}
+
+@font-face {
+    font-family: AyatNumbers;
+    src: url('AyatNumbers.ttf');
+}
+
+.stopScrolling {
+    height: 100%;
+    overflow: hidden;
+  }
