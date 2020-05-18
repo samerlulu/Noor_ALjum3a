@@ -27,9 +27,9 @@ $(document).ready(function () {
     AppSettings.SetAppAyaFontSize(AyaFontSizes.GetAyaFontSize());
 
     // Events Attaching
-    $("#Ayat").on("touchstart click", ayatTouchStart);
-    $("#Ayat").on("touchend click", ayatTouchEnd);
-    $("#Ayat").on("touchmove click", ayatTouchMove);
+    $("#Ayat").on("touchstart mousedown", ayatTouchStart);
+    $("#Ayat").on("touchend mouseup", ayatTouchEnd);
+    $("#Ayat").on("touchmove", ayatTouchMove);
 
     $("#Ayat").on("dblclick", showSettings);
 
@@ -119,6 +119,10 @@ function ayatTouchStart() {
     event.preventDefault();
     event.stopPropagation();
 
+    if(event.type == 'touchstart'){
+        $(this).off('mousedown');
+    }
+
     pressTimer = setTimeout(function () { toggleScrolling = false; showSettings(); }, 1000);
 
     return false;
@@ -128,8 +132,12 @@ function ayatTouchEnd() {
     event.preventDefault();
     event.stopPropagation();
 
-    clearTimeout(pressTimer);
+    if(event.type == 'touchend'){
+        $(this).off('mouseup');
+    }
 
+    clearTimeout(pressTimer);
+    msg(toggleScrolling);
     if(moveDirection == 0) {
         if (toggleScrolling) {
             startScroll();
@@ -153,23 +161,37 @@ function ayatTouchEnd() {
 function showSettings() {
     $('#Ayat').on('touchmove', function(e){e.preventDefault()});
     $('body').addClass('stopScrolling');
-
     $("#Settings").fadeIn();
 }
 
 function btnCloseSettings() {
+    
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#Ayat").on("touchmove", ayatTouchMove);
     $('body').removeClass('stopScrolling');
-    
+
     $("#Settings").fadeOut();
 }
 
 function btnShowColorModeSettings() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divScreenModesSettingsView").fadeIn();
     setSelectedScreenMode(ScreenModes.GetScreenMode())
 }
 
 function btnShowScrollingSettings() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divScrollingSpeedSettingsView").fadeIn();
     $("#scrollCounter").text(ScrollSpeeds.GetScrollSpeed());
     $("#textSampleScrolling").scrollTop(0);
@@ -182,6 +204,11 @@ function btnShowScrollingSettings() {
 }
 
 function btnShowAyaFontSizeSettings() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divAyaFontSizeSettingsView").fadeIn();
 
     const vAyaFontSize = AyaFontSizes.GetAyaFontSize();
@@ -191,14 +218,29 @@ function btnShowAyaFontSizeSettings() {
 }
 
 function btnShowAboutApp() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divAboutApp").fadeIn();
 }
 
 function btnShowContactUs() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divContactUs").fadeIn();
 }
 
 function btnSaveColorMode(e) {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     var vScreenMode = e.data.vScreenMode;
     AppSettings.SetAppScreenMode(vScreenMode);
     ScreenModes.SetScreenMode(vScreenMode);
@@ -206,28 +248,57 @@ function btnSaveColorMode(e) {
 }
 
 function btnDoneColorMode() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divScreenModesSettingsView").fadeOut();
 }
 
 function btnDoneScrollingSpeed() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $('#textSampleScrolling').stop();
     $("#textSampleScrolling").scrollTop(0);
     $("#divScrollingSpeedSettingsView").fadeOut();
 }
 
 function btnDoneAyaFontSize() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divAyaFontSizeSettingsView").fadeOut();
 }
 
 function btnDoneAboutUs() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divAboutApp").fadeOut();
 }
 
 function btnDoneContactUs() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divContactUs").fadeOut();
 }
 
 function btnSlowerScroll() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
 
     var vScrollSpeed = ScrollSpeeds.GetScrollSpeed();
     if (vScrollSpeed > 0) {
@@ -249,6 +320,10 @@ function btnSlowerScroll() {
 
 function btnFasterScroll() {
 
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     var vScrollSpeed = ScrollSpeeds.GetScrollSpeed();
     if (vScrollSpeed < 10) {
         vScrollSpeed = vScrollSpeed + 1;
@@ -269,6 +344,10 @@ function btnFasterScroll() {
 }
 
 function btnSmallerAyaTextSize() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
 
     var vAyaFontSize = AyaFontSizes.GetAyaFontSize();
     if (vAyaFontSize > 1) {
@@ -292,6 +371,10 @@ function btnSmallerAyaTextSize() {
 
 function btnBiggerAyaTextSize() {
 
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     var vAyaFontSize = AyaFontSizes.GetAyaFontSize();
     if (vAyaFontSize < 10) {
         vAyaFontSize = vAyaFontSize + 1;
@@ -312,10 +395,19 @@ function btnBiggerAyaTextSize() {
 }
 
 function btnShowDemo() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     $("#divDemo").fadeIn();
 }
 
 function btnCloseDemo() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
 
     const vChoice = ShowDemoAgainChoice.GetShowDemoAgainChoice();
     if (vChoice == ShowDemoAgainChoice.YES) {
@@ -326,6 +418,11 @@ function btnCloseDemo() {
 }
 
 function btnShowDemoYes() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     AppSettings.SetAppShowDemo(ShowDemoAgainChoice.YES);
     $("#divSora").fadeIn();
     $("#divDemo").fadeOut();
@@ -333,6 +430,11 @@ function btnShowDemoYes() {
 }
 
 function btnShowDemoNo() {
+
+    if(event.type == 'touchstart'){
+        $(this).off('click');
+    }
+
     AppSettings.SetAppShowDemo(ShowDemoAgainChoice.NO);
     $("#divSora").fadeIn();
     $("#divDemo").fadeOut();
@@ -649,6 +751,6 @@ function isExist(value, ObjectX) {
 }
 
 // for debug
-// function msg(s) {
-//     console.log(s);
-// }
+function msg(s) {
+    console.log(s);
+}

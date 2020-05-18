@@ -12,7 +12,6 @@ body {
     background: rgb(243, 237, 209);
     /* Normal Mode */
     background: linear-gradient(90deg, rgba(243, 237, 209, 1) 0%, rgba(248, 244, 217, 1) 50%, rgba(241, 236, 213, 1) 100%);
-    
     user-select: none;
 }
 
@@ -44,8 +43,7 @@ body {
 }
 
 .ayaNumber, #Header {
-    color: #a12d2d;
-    /* color:#379b25;  */
+    color: #379b25;
 }
 
 #Ayat {
@@ -68,22 +66,18 @@ body {
     display: none;
     text-align: center;
     overflow: scroll;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-between; */
 }
 
-#divSettingsOuter{
+#divSettingsOuter {
     display: table;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    
 }
 
-#divSettingsInner{
+#divSettingsInner {
     display: table-cell;
     vertical-align: middle;
 }
@@ -91,31 +85,30 @@ body {
 #divSettingsControls {
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
-#divDemo{
+#divDemo {
     width: 100%;
     height: 100%;
     z-index: 25;
     position: fixed;
     background: black;
-    top:0px;
+    top: 0px;
     right: 0px;
     left: 0px;
     bottom: 0px;
-    visibility:visible; 
+    visibility: visible;
     text-align: center;
     margin: 0;
     padding: 0;
     display: block;
 }
 
-#demoImg{
+#demoImg {
     max-width: 90%;
-    /* max-height: 100%; */
 }
 
-#divBtnCloseDemo{
+#divBtnCloseDemo {
     position: fixed;
     bottom: 15px;
     margin: 0;
@@ -123,31 +116,26 @@ body {
     width: 100%;
 }
 
-#btnCloseDemo{
+#btnCloseDemo {
     text-shadow: 0 0 5px black;
 }
 
-#divDemoAskShowAgian{
+#divDemoAskShowAgian {
     top: 40%;
     height: fit-content;
     padding: 10px 0;
     display: none;
 }
 
-#divDemoAskShowAgian .controls{
+#divDemoAskShowAgian .controls {
     display: inline;
 }
 
-#divDemoAskShowAgian p{
+#divDemoAskShowAgian p {
     color: whitesmoke;
 }
 
 .controls {
-    /* margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 10%;
-    margin-bottom: 10%; */
-    /* width: 100%; */
     margin: 2rem;
 }
 
@@ -180,7 +168,6 @@ body {
 }
 
 #ScreenModes {
-    /* list-style: none; */
     padding: 0;
 }
 
@@ -192,31 +179,29 @@ body {
     display: none;
 }
 
-#divAyaFontSizeSettingsView{
+#divAyaFontSizeSettingsView {
     display: none;
 }
 
-
-#divAboutApp{
+#divAboutApp {
     display: none;
 }
 
-#imgLogoAbout{
-    /* width: 25vw; */
+#imgLogoAbout {
     width: 7rem;
     height: auto;
     margin-top: 15px;
 }
 
-#titleAboutApp{
+#titleAboutApp {
     margin: 5px auto;
 }
 
-#divContactUs{
+#divContactUs {
     display: none;
 }
 
-#textAboutApp{
+#textAboutApp {
     text-align: justify;
     font-size: large;
     padding: 0 20px;
@@ -224,17 +209,12 @@ body {
     height: 80vh;
     margin-top: 1vh;
 }
-/* #ScreenModes li {
-    /* padding:5px 0; 
-    margin-bottom: 10px;
-} */
 
-#imgSFL_Logo{
-    /* width: 34vw; */
+#imgSFL_Logo {
     width: 7rem;
 }
 
-#textContactUs{
+#textContactUs {
     font-size: large;
 }
 
@@ -245,15 +225,15 @@ body {
     background-color: aquamarine;
 }
 
-.controlCounter{
+.controlCounter {
     border: 2px solid whitesmoke;
     border-radius: 25%;
-    padding:5px 15px;
+    padding: 5px 15px;
     margin: 0 10px;
     font-size: 20px;
 }
 
-.controlImage{
+.controlImage {
     width: 30px;
     height: 30px;
     vertical-align: middle;
@@ -262,38 +242,34 @@ body {
     filter: invert();
 }
 
-.controlText{
+.controlText {
     font-size: 20px;
 }
 
-.mainControls{
+.mainControls {
     width: 100%;
-    /* position: relative; */
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.inlineLink{
+.inlineLink {
     text-decoration: none;
     color: lightblue;
     font-weight: bold;
 }
 
-.textSample{
+.textSample {
     margin: 20px 20px;
     font-size: 24px;
     height: 50vh;
-    /* position: relative; */
-    /* display: inline; */
-    
     text-align: justify;
     overflow: scroll;
     font-family: UthmanicHafs1;
 }
 
 .ScreenModesHeader {
-    /* display:inline; */
     text-align: right;
     margin: 0 10px 0 0;
     width: 100%;
@@ -367,24 +343,19 @@ body {
 .stopScrolling {
     height: 100%;
     overflow: hidden;
-  }
+}
 
-/* For some css rules that not working at FF */
-  @-moz-document url-prefix() {
+/* For some css rules that not working at FireFox */
 
+@-moz-document url-prefix() {
     #Settings {
-        background: rgba(18,42,59,0.95); 
+        background: rgba(18, 42, 59, 0.95);
     }
-
-    .SettingBox{
-        background: rgba(18,42,59,0.95); 
+    .SettingBox {
+        background: rgba(18, 42, 59, 0.95);
     }
-
-    #divDemoAskShowAgian{
+    #divDemoAskShowAgian {
         background: black;
         bottom: auto;
     }
-
-    
-
 }
