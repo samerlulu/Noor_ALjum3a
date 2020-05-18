@@ -26,40 +26,44 @@ $(document).ready(function () {
     AppSettings.SetAppScrollSpeed(ScrollSpeeds.GetScrollSpeed());
     AppSettings.SetAppAyaFontSize(AyaFontSizes.GetAyaFontSize());
 
-    // Events Binding
-    $("#Ayat").bind("touchstart", ayatTouchStart);
-    $("#Ayat").bind("touchend", ayatTouchEnd);
-    $("#Ayat").bind("touchmove", ayatTouchMove);
+    // Events Attaching
+    $("#Ayat").on("touchstart click", ayatTouchStart);
+    $("#Ayat").on("touchend click", ayatTouchEnd);
+    $("#Ayat").on("touchmove click", ayatTouchMove);
 
-    $("#btnClose").bind("touchstart", btnClose);
+    $("#Ayat").on("dblclick", showSettings);
 
-    $("#btnDoneColorMode").bind("touchstart", btnDoneColorMode);
-    $("#btnDoneScrollingSpeed").bind("touchstart", btnDoneScrollingSpeed);
-    $("#btnDoneAyaFontSize").bind("touchstart", btnDoneAyaFontSize);
-    $("#btnDoneAboutUs").bind("touchstart", btnDoneAboutUs);
-    $("#btnDoneContactUs").bind("touchstart", btnDoneContactUs);
+    $("#SoraTitle").on("touchstart click", showSettings);
 
-    $("#btnShowColorModeSettings").bind("touchstart", btnShowColorModeSettings);
-    $("#ScreenModeNormal").bind("touchstart", { vScreenMode: ScreenModes.NORMAL }, btnSaveColorMode);
-    $("#ScreenModeDark").bind("touchstart", { vScreenMode: ScreenModes.DARK }, btnSaveColorMode);
-    $("#ScreenModeLight").bind("touchstart", { vScreenMode: ScreenModes.LIGHT }, btnSaveColorMode);
+    $("#btnCloseSettings").on("touchstart click", btnCloseSettings);
 
-    $("#btnShowScrollingSettings").bind("touchstart", btnShowScrollingSettings);
-    $("#btnSlowerScroll").bind("touchstart", btnSlowerScroll);
-    $("#btnFasterScroll").bind("touchstart", btnFasterScroll);
+    $("#btnDoneColorMode").on("touchstart click", btnDoneColorMode);
+    $("#btnDoneScrollingSpeed").on("touchstart click", btnDoneScrollingSpeed);
+    $("#btnDoneAyaFontSize").on("touchstart click", btnDoneAyaFontSize);
+    $("#btnDoneAboutUs").on("touchstart click", btnDoneAboutUs);
+    $("#btnDoneContactUs").on("touchstart click", btnDoneContactUs);
 
-    $("#btnShowAyaFontSizeSettings").bind("touchstart", btnShowAyaFontSizeSettings);
-    $("#btnSmallerAyaTextSize").bind("touchstart", btnSmallerAyaTextSize);
-    $("#btnBiggerAyaTextSize").bind("touchstart", btnBiggerAyaTextSize);
+    $("#btnShowColorModeSettings").on("touchstart click", btnShowColorModeSettings);
+    $("#ScreenModeNormal").on("touchstart click", { vScreenMode: ScreenModes.NORMAL }, btnSaveColorMode);
+    $("#ScreenModeDark").on("touchstart click", { vScreenMode: ScreenModes.DARK }, btnSaveColorMode);
+    $("#ScreenModeLight").on("touchstart click", { vScreenMode: ScreenModes.LIGHT }, btnSaveColorMode);
 
-    $("#btnShowAboutApp").bind("touchstart", btnShowAboutApp);
+    $("#btnShowScrollingSettings").on("touchstart click", btnShowScrollingSettings);
+    $("#btnSlowerScroll").on("touchstart click", btnSlowerScroll);
+    $("#btnFasterScroll").on("touchstart click", btnFasterScroll);
 
-    $("#btnShowContactUs").bind("touchstart", btnShowContactUs);
+    $("#btnShowAyaFontSizeSettings").on("touchstart click", btnShowAyaFontSizeSettings);
+    $("#btnSmallerAyaTextSize").on("touchstart click", btnSmallerAyaTextSize);
+    $("#btnBiggerAyaTextSize").on("touchstart click", btnBiggerAyaTextSize);
 
-    $("#btnShowDemo").bind("touchstart", btnShowDemo);
-    $("#btnCloseDemo").bind("touchstart", btnCloseDemo);
-    $("#btnShowDemoYes").bind("touchstart", btnShowDemoYes);
-    $("#btnShowDemoNo").bind("touchstart", btnShowDemoNo);
+    $("#btnShowAboutApp").on("touchstart click", btnShowAboutApp);
+
+    $("#btnShowContactUs").on("touchstart click", btnShowContactUs);
+
+    $("#btnShowDemo").on("touchstart click", btnShowDemo);
+    $("#btnCloseDemo").on("touchstart click", btnCloseDemo);
+    $("#btnShowDemoYes").on("touchstart click", btnShowDemoYes);
+    $("#btnShowDemoNo").on("touchstart click", btnShowDemoNo);
 
     // To Show/Hide Demo at Stratup
     const vChoice = ShowDemoAgainChoice.GetShowDemoAgainChoice();
@@ -74,9 +78,9 @@ function ayatTouchMove() {
     event.stopPropagation();
 
     // get touch position
-    var x = Math.round( event.touches[0].clientX );
+    //var x = Math.round( event.touches[0].clientX );
     var y = Math.round( event.touches[0].clientY );
-    var x2 = Math.round( event.touches[0].clientX );
+    //var x2 = Math.round( event.touches[0].clientX );
     var y2 = Math.round( event.touches[0].clientY );
 
     const scrollTop = $(document).scrollTop();
@@ -147,14 +151,14 @@ function ayatTouchEnd() {
 }
 
 function showSettings() {
-    $('#Ayat').bind('touchmove', function(e){e.preventDefault()});
+    $('#Ayat').on('touchmove', function(e){e.preventDefault()});
     $('body').addClass('stopScrolling');
 
     $("#Settings").fadeIn();
 }
 
-function btnClose() {
-    $("#Ayat").bind("touchmove", ayatTouchMove);
+function btnCloseSettings() {
+    $("#Ayat").on("touchmove", ayatTouchMove);
     $('body').removeClass('stopScrolling');
     
     $("#Settings").fadeOut();

@@ -12,8 +12,7 @@ body {
     background: rgb(243, 237, 209);
     /* Normal Mode */
     background: linear-gradient(90deg, rgba(243, 237, 209, 1) 0%, rgba(248, 244, 217, 1) 50%, rgba(241, 236, 213, 1) 100%);
-    /* background: rgb(18,42,59);
-    background: radial-gradient(circle, rgba(18,42,59,1) 0%, rgba(45,94,129,1) 50%, rgba(18,42,59,1) 100%); */
+    
     user-select: none;
 }
 
@@ -58,12 +57,7 @@ body {
     height: 100%;
     z-index: 10;
     position: fixed;
-    /* background-color: rgba(18, 42, 59,1); */
     font-size: medium;
-    /* background: rgb(18,42,59);  */
-    /* background: linear-gradient(90deg, rgba(18,42,59,0) 0%, rgba(18,42,59,0.9) 5%, rgba(18,42,59,0.9) 50%, rgba(18,42,59,0.9) 95%, rgba(18,42,59,0) 100%);
-    /* filter: blur(5px);
-    -webkit-filter: blur(5px); */
     -webkit-backdrop-filter: blur(10px) drop-shadow(0px 0px 20px #fff) brightness(40%);
     backdrop-filter: blur(10px) drop-shadow(0px 0px 20px #fff) brightness(40%);
     color: white;
@@ -73,10 +67,10 @@ body {
     bottom: 0px;
     display: none;
     text-align: center;
-    /* visibility: hidden; */
-    /* padding: 10% 0; */
-    /* vertical-align: middle; */
-
+    overflow: scroll;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
 }
 
 #divSettingsOuter{
@@ -127,7 +121,6 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    /* background-color: rgba(0, 0, 0, 0.8); */
 }
 
 #btnCloseDemo{
@@ -150,11 +143,12 @@ body {
 }
 
 .controls {
-    margin-left: 10%;
+    /* margin-left: 10%;
     margin-right: 10%;
     margin-top: 10%;
-    margin-bottom: 10%;
+    margin-bottom: 10%; */
     /* width: 100%; */
+    margin: 2rem;
 }
 
 .buttons {
@@ -208,7 +202,8 @@ body {
 }
 
 #imgLogoAbout{
-    width: 25vw;
+    /* width: 25vw; */
+    width: 7rem;
     height: auto;
     margin-top: 15px;
 }
@@ -234,8 +229,9 @@ body {
     margin-bottom: 10px;
 } */
 
-#imgLogo{
-    width: 34vw;
+#imgSFL_Logo{
+    /* width: 34vw; */
+    width: 7rem;
 }
 
 #textContactUs{
@@ -331,7 +327,7 @@ body {
 
 .divDoneButton {
     width: 100%;
-    position: fixed;
+    position: absolute;
     bottom: 10px;
 }
 
@@ -372,3 +368,23 @@ body {
     height: 100%;
     overflow: hidden;
   }
+
+/* For some css rules that not working at FF */
+  @-moz-document url-prefix() {
+
+    #Settings {
+        background: rgba(18,42,59,0.95); 
+    }
+
+    .SettingBox{
+        background: rgba(18,42,59,0.95); 
+    }
+
+    #divDemoAskShowAgian{
+        background: black;
+        bottom: auto;
+    }
+
+    
+
+}
