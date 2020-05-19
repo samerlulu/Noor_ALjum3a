@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1EBC6"
+    android:background="#0F1F2D"
     tools:context=".MainActivity">
 
     <WebView

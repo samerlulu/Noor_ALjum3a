@@ -7,14 +7,14 @@ for suggestions and commments please email at: s@SamerLulu.com  / Samer.Lulu@gma
 
 */
 
-package com.example.noor_aljum3a
+package com.samerlulu.noor_aljum3a
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 
-class launcher :AppCompatActivity()  {
+class Launcher :AppCompatActivity()  {
 
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable

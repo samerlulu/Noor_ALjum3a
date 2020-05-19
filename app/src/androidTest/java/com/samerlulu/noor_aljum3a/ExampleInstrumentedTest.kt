@@ -1,4 +1,4 @@
-package com.example.noor_aljum3a
+package com.samerlulu.noor_aljum3a
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -7,7 +7,7 @@ for suggestions and commments please email at: s@SamerLulu.com  / Samer.Lulu@gma
 
 */
 
-package com.example.noor_aljum3a
+package com.samerlulu.noor_aljum3a
 
 import android.os.Bundle
 import android.webkit.WebSettings
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         wvMain.loadUrl("file:///android_asset/htmls/main.html")
         wvMain.settings.javaScriptEnabled = true //to enable java scripts
 
-        val settings: WebSettings = wvMain.getSettings()
+        val settings: WebSettings = wvMain.settings
         settings.domStorageEnabled = true //to enable local web storage
         settings.databaseEnabled = true //to enable local web storage
 
