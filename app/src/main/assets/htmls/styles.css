@@ -9,9 +9,9 @@ for suggestions and commments please email at: s@SamerLulu.com  / Samer.Lulu@gma
 
 body {
     direction: rtl;
-    background: rgb(243, 237, 209);
-    /* Normal Mode */
-    background: linear-gradient(90deg, rgba(243, 237, 209, 1) 0%, rgba(248, 244, 217, 1) 50%, rgba(241, 236, 213, 1) 100%);
+    background: rgba(18, 42, 59, 0.95);
+    /* Dark Mode */
+    background: radial-gradient(circle, rgb(18, 42, 59) 0%, rgb(45, 94, 129) 50%, rgb(18, 42, 59) 100%);
     user-select: none;
 }
 
@@ -75,6 +75,7 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
+    background:  rgba(18, 42, 59, 0.8);
 }
 
 #divSettingsInner {
@@ -101,7 +102,8 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    display: block;
+    /* display: block; */
+    display: none;
 }
 
 #demoImg {
@@ -207,7 +209,7 @@ body {
     padding: 0 20px;
     overflow: scroll;
     height: 80vh;
-    margin-top: 1vh;
+    margin: 2vh 0;
 }
 
 #imgSFL_Logo {
@@ -251,7 +253,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -54%);
 }
 
 .inlineLink {
@@ -358,4 +360,12 @@ body {
         background: black;
         bottom: auto;
     }
+}
+
+#Settings, .SettingBox {
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    -ms-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }

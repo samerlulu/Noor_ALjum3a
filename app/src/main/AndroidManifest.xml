@@ -13,23 +13,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity">
 
-        <activity android:name="com.samerlulu.noor_aljum3a.Launcher">
+        <activity android:name="com.samerlulu.noor_aljum3a.Launcher"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.samerlulu.noor_aljum3a.MainActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

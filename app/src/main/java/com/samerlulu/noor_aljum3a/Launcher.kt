@@ -22,7 +22,7 @@ class Launcher :AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launcher)
-
+        
         mRunnable = Runnable {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
