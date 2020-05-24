@@ -7,6 +7,19 @@
     android:background="#0F1F2D"
     tools:context=".MainActivity">
 
+<!--    For Future Development to communicate with webview using JavaScript Bridge -->
+<!--    <Button-->
+<!--        android:id="@+id/btnMain"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:text=""-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/wvMain"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/wvMain"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <WebView
         android:id="@+id/wvMain"
         android:layout_width="0dp"

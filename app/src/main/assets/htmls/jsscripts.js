@@ -9,7 +9,6 @@ for suggestions and commments please email at: s@SamerLulu.com  / Samer.Lulu@gma
 
 // Main Global Vars
 var toggleScrolling = true;
-var pressTimer;
 var moveDirection = 0;
 var firstMovePosX = 0;
 var secondMovePosX = 0;
@@ -21,17 +20,16 @@ $(document).ready(function () {
 
     var currentScreenMode = ScreenMode.NORMAL;
 
-    // Load Settiing
-    AppSettings.SetAppScreenMode(ScreenModes.GetScreenMode());
-    AppSettings.SetAppScrollSpeed(ScrollSpeeds.GetScrollSpeed());
-    AppSettings.SetAppAyaFontSize(AyaFontSizes.GetAyaFontSize());
+    // Load Settings 
+    AppSettings.SetAppSettings(); 
 
     // Events Attaching
     $("#Ayat").on("touchstart mousedown", ayatTouchStart);
     $("#Ayat").on("touchend mouseup", ayatTouchEnd);
     $("#Ayat").on("touchmove", ayatTouchMove);
 
-    $("#Ayat").on("dblclick", showSettings);
+    $("#Ayat").attr("data-long-press-delay", "400");
+    $("#Ayat").on("dblclick contextmenu long-press", showSettings);
 
     $("#SoraTitle").on("touchstart click", showSettings);
 
@@ -68,31 +66,57 @@ $(document).ready(function () {
     // To Show/Hide Demo at Stratup
     const vChoice = ShowDemoAgainChoice.GetShowDemoAgainChoice();
     showDemo(vChoice);
-    
+
 }); // ##### end of Document Ready
 
 
 // events handlers
+function AyatToggleScroll() {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.type == 'touchend') {
+        $(this).off('mouseup');
+    }
+    if (event.type == 'touchstart') {
+        $(this).off('mousedown');
+    }
+
+
+    if (toggleScrolling) {
+        startScroll();
+    } else {
+        stopScroll();
+    }
+
+
+    //to start/stop scrolling
+    toggleScrolling = !toggleScrolling;
+
+    return false;
+}
+
+
 function ayatTouchMove() {
     event.preventDefault();
     event.stopPropagation();
 
     // get touch position
     //var x = Math.round( event.touches[0].clientX );
-    var y = Math.round( event.touches[0].clientY );
+    var y = Math.round(event.touches[0].clientY);
     //var x2 = Math.round( event.touches[0].clientX );
-    var y2 = Math.round( event.touches[0].clientY );
+    var y2 = Math.round(event.touches[0].clientY);
 
     const scrollTop = $(document).scrollTop();
 
-    clearTimeout(pressTimer);
+    //clearTimeout(pressTimer);
     toggleScrolling = false;
- 
+
     //detect move direction
-    if (firstMovePosX == 0){
+    if (firstMovePosX == 0) {
         firstMovePosX = y;
-    } 
-    
+    }
+
     secondMovePosX = y2;
     moveDirection = Math.sign(firstMovePosX - secondMovePosX);
     delta = delta + 1;
@@ -102,15 +126,15 @@ function ayatTouchMove() {
     var deltaH = document.body.clientHeight;
     var deltaW = document.body.clientWidth;
 
-    const deltaX = deltaH / deltaW /10;
+    const deltaX = deltaH / deltaW / 10;
 
-    
-    $('html, body').animate({ scrollTop: scrollTop + moveDirection * deltaX},
-                {
-                    duration: 0,
-                    easing: "linear"
-                }
-            );
+
+    $('html, body').animate({ scrollTop: scrollTop + moveDirection * deltaX },
+        {
+            duration: 0,
+            easing: "linear"
+        }
+    );
 
     return false;
 }
@@ -119,11 +143,9 @@ function ayatTouchStart() {
     event.preventDefault();
     event.stopPropagation();
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('mousedown');
     }
-
-    pressTimer = setTimeout(function () { toggleScrolling = false; showSettings(); }, 1000);
 
     return false;
 }
@@ -132,23 +154,21 @@ function ayatTouchEnd() {
     event.preventDefault();
     event.stopPropagation();
 
-    if(event.type == 'touchend'){
+    if (event.type == 'touchend') {
         $(this).off('mouseup');
     }
 
-    clearTimeout(pressTimer);
-    msg(toggleScrolling);
-    if(moveDirection == 0) {
+    if (moveDirection == 0) {
         if (toggleScrolling) {
             startScroll();
         } else {
             stopScroll();
         }
     }
-    
+
     //to start/stop scrolling
     toggleScrolling = !toggleScrolling;
-    
+
     // reset counters/flags
     moveDirection = 0;
     firstMovePosX = 0;
@@ -158,15 +178,22 @@ function ayatTouchEnd() {
     return false;
 }
 
+// Others
 function showSettings() {
-    $('#Ayat').on('touchmove', function(e){e.preventDefault()});
+    if (event.type != 'touchstart') {
+        event.preventDefault();
+    }
+
+    $(this).off('touchmove');
+
     $('body').addClass('stopScrolling');
     $("#Settings").fadeIn();
+    toggleScrolling = false;
 }
 
 function btnCloseSettings() {
-    
-    if(event.type == 'touchstart'){
+
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -178,17 +205,28 @@ function btnCloseSettings() {
 
 function btnShowColorModeSettings() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
-    $("#divScreenModesSettingsView").fadeIn();
-    setSelectedScreenMode(ScreenModes.GetScreenMode())
+    var flag = true;
+    var wait = setInterval(function () {
+        if (flag) {
+            $("#divScreenModesSettingsView").fadeIn();
+            setSelectedScreenMode(ScreenModes.GetScreenMode())
+
+            flag = false;
+        }
+        else {
+            clearInterval(wait);
+        };
+    }, 200); // wait for 200ms
+
 }
 
 function btnShowScrollingSettings() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -205,7 +243,7 @@ function btnShowScrollingSettings() {
 
 function btnShowAyaFontSizeSettings() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -219,7 +257,7 @@ function btnShowAyaFontSizeSettings() {
 
 function btnShowAboutApp() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -228,7 +266,7 @@ function btnShowAboutApp() {
 
 function btnShowContactUs() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -237,7 +275,7 @@ function btnShowContactUs() {
 
 function btnSaveColorMode(e) {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -249,7 +287,7 @@ function btnSaveColorMode(e) {
 
 function btnDoneColorMode() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -258,7 +296,7 @@ function btnDoneColorMode() {
 
 function btnDoneScrollingSpeed() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -269,7 +307,7 @@ function btnDoneScrollingSpeed() {
 
 function btnDoneAyaFontSize() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -278,7 +316,7 @@ function btnDoneAyaFontSize() {
 
 function btnDoneAboutUs() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -287,7 +325,7 @@ function btnDoneAboutUs() {
 
 function btnDoneContactUs() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -296,7 +334,7 @@ function btnDoneContactUs() {
 
 function btnSlowerScroll() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -320,7 +358,7 @@ function btnSlowerScroll() {
 
 function btnFasterScroll() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -345,7 +383,7 @@ function btnFasterScroll() {
 
 function btnSmallerAyaTextSize() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -371,7 +409,7 @@ function btnSmallerAyaTextSize() {
 
 function btnBiggerAyaTextSize() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -396,7 +434,7 @@ function btnBiggerAyaTextSize() {
 
 function btnShowDemo() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -405,7 +443,7 @@ function btnShowDemo() {
 
 function btnCloseDemo() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -419,7 +457,7 @@ function btnCloseDemo() {
 
 function btnShowDemoYes() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -431,7 +469,7 @@ function btnShowDemoYes() {
 
 function btnShowDemoNo() {
 
-    if(event.type == 'touchstart'){
+    if (event.type == 'touchstart') {
         $(this).off('click');
     }
 
@@ -441,11 +479,14 @@ function btnShowDemoNo() {
     $("#divDemoAskShowAgian").css("display", "none");
 }
 
-function showDemo(vChoice){
-    if (vChoice == ShowDemoAgainChoice.NO){
+function showDemo(vChoice) {
+    if (vChoice == ShowDemoAgainChoice.NO) {
         $("#divDemo").css("display", "none");
         $("#divSora").css("display", "block");
-    } 
+    } else {
+        $("#divDemo").css("display", "block");
+        $("#divSora").css("display", "none");
+    }
 }
 
 // ###### Main Functions
@@ -460,7 +501,7 @@ function startScroll() {
     } else {
         const fastRatio = xScrollSpeed != 0 ? 1 / xScrollSpeed : 0;
         const scrollTop = $(document).scrollTop();
-        const fullDurationInMilliSecond = 1000000; // default 1000,000
+        const fullDurationInMilliSecond = 1000000; // default 1000000
 
         const durationRatio = (documentHeight - scrollTop) / documentHeight
 
@@ -490,7 +531,7 @@ function doScrollingSample() {
     } else {
         const fastRatio = xScrollSpeed != 0 ? 1 / xScrollSpeed : 0;
         const scrollTop = $(document).scrollTop();
-        const fullDurationInMilliSecond = 1000000; // default 1000,000
+        const fullDurationInMilliSecond = 1000000; // default 1000000
 
         const durationRatio = (documentHeight - scrollTop) / documentHeight
 
@@ -610,7 +651,7 @@ const AppSettings = {
 
     },
 
-    SetAppShowDemo(vChoice){
+    SetAppShowDemo(vChoice) {
         if (vChoice == ShowDemoAgainChoice.YES) {
             ShowDemoAgainChoice.ShowDemoAgian();
         } else {
@@ -631,7 +672,7 @@ const ScreenModes = {
         if (isExist(vScreenMode, ScreenModes)) {
             localStorage.setItem(ScreenMode, vScreenMode);
         } else {
-            localStorage.setItem(ScreenMode, ScreenModes.NORMAL);
+            localStorage.setItem(ScreenMode, ScreenModes.DARK);
         }
     },
 
@@ -723,22 +764,22 @@ const AyaFontSizes = {
 
 const ShowDemoChoice = "ShowDemo";
 const ShowDemoAgainChoice = {
-    YES : "yes",
-    NO : "no",
+    YES: "yes",
+    NO: "no",
 
-    ShowDemoAgian(){
+    ShowDemoAgian() {
         localStorage.setItem(ShowDemoChoice, ShowDemoAgainChoice.YES);
     },
 
-    DontShowDemoAgain(){
+    DontShowDemoAgain() {
         localStorage.setItem(ShowDemoChoice, ShowDemoAgainChoice.NO);
 
     },
 
-    GetShowDemoAgainChoice(){
+    GetShowDemoAgainChoice() {
         var vChoice = localStorage.getItem(ShowDemoChoice);
         if (vChoice == null || !isExist(vChoice, ShowDemoAgainChoice)) {
-        // if (vChoice == null ) {
+            // if (vChoice == null ) {
             vChoice = ShowDemoAgainChoice.YES;
             this.ShowDemoAgian();
         }
@@ -754,3 +795,52 @@ function isExist(value, ObjectX) {
 function msg(s) {
     console.log(s);
 }
+
+// For Run Time Debuging/Loging
+//
+// important note: tell function to be enabled with div id="divDebugView"
+// function tell(s) {
+//     $("#debugText").text("Debug: " + s);
+//     console.log("Debug: " + s);
+// }
+
+// For Future Development to communicate with kotlin using JavaScript Bridge 
+//
+// Kotlin Delegate
+//
+//window.androidObj = function AndroidClass() { }; // make interface with kotlin main
+//
+// function doThisFromJS(vAction) {
+//     window.androidObj.doThis = function (vAction) {
+//         javascript_obj.doThisFromJS(vAction); // load the function defined at kotlin main
+//     }
+// }
+//
+//
+// function AndroidClass(){};
+//
+// function doThisFromKotlin(vAction) {
+//     try {
+//         switch (vAction) {
+//             case "click":
+//                 doThisFromJS("JS_YES");
+//                 //window.androidObj.doThis("JS_YES");
+//                 //btnCloseDemo(); 
+//                 break;
+//
+//             case "long_click":
+//                 doThisFromJS("JS_NO");
+//
+//                 //window.androidObj.doThis("JS_NO");
+//                 //showSettings(); 
+//                 break;
+//
+//             default:
+//                 window.androidObj.doThis("None");
+//
+//         }
+//     } catch (error) {
+//         $("#debugText").text(error.message);
+//     }
+//
+// }
